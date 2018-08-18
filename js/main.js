@@ -158,10 +158,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
+  const picture = document.createElement('picture');
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  image.setAttribute('alt', `${restaurant.name} restaurant`);
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+  picture.append(image);
+  li.append(picture);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
@@ -176,6 +179,7 @@ createRestaurantHTML = (restaurant) => {
   li.append(address);
 
   const more = document.createElement('a');
+  more.setAttribute('aria-label', `View Details of ${restaurant.name} restaurant`);
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
@@ -209,3 +213,23 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 } */
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  setTimeout(() => {
+
+    let tabedElems = document.querySelectorAll('.leaflet-pane');
+    tabedElems.forEach(tabedElem => {
+      let children = tabedElem.children;
+      for(let i = 0; i < children.length; i++) {
+        children[i].setAttribute('tabindex', '-1');
+      }
+    });
+    let tabedElem = document.querySelector('.leaflet-container');
+    tabedElem.setAttribute('aria-label', 'Location of restaurants on the map');
+
+    tabedElems = document.querySelector('.leaflet-control-attribution');
+    for(let i = 0; i < tabedElems.children.length; i++) {
+      tabedElems.children[i].setAttribute('tabindex', '-1');
+    }
+  }, 5000);
+
+})

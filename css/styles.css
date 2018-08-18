@@ -14,6 +14,13 @@ body {
   position: relative;
   background-color: #fdfdfd;
 }
+a:focus,
+div:focus,
+select:focus {
+  -webkit-box-shadow: 0px 0px 3px 4px rgba(255, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 3px 4px rgba(255, 0, 0, 1);
+  box-shadow: 0px 0px 3px 4px rgba(255, 0, 0, 1);
+}
 ul,
 li {
   color: #333;
@@ -129,7 +136,7 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   padding-top: 10px;
   align-items: center;
   background-color: #3397db;
@@ -141,7 +148,15 @@ nav h1 a {
   font-size: 1.5em;
   font-weight: normal;
 }
-.filter-options select {
+.filter-options form {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 5px;
+}
+.filter-options form label {
+  color: white;
+}
+.filter-options form select {
   height: 35px;
   margin: 10px;
   width: 200px;
@@ -155,8 +170,8 @@ nav h1 a {
 
 /* ====================== Restaurant Listing ====================== */
 .result-div {
-  margin: 0 auto;
-  max-width: 80%;
+  /* margin: 0 auto;
+  max-width: 80%; */
 }
 #restaurants-list {
   display: flex;
@@ -181,7 +196,7 @@ nav h1 a {
   display: block;
   max-width: 100%;
   min-width: 100%;
-  min-height: 248px;
+  min-height: 216px;
   background-color: #ccc;
 }
 #restaurants-list li h1 {
@@ -294,15 +309,28 @@ nav h1 a {
   color: #666;
 }
 
+@media (max-width: 735px) {
+  .filter-options {
+    padding-bottom: 10px;
+  }
+  .filter-options h2 {
+    text-align: center;
+  }
+  .filter-options #cuisines-select {
+    margin-left: 49px;
+  }
+
+  @media (max-width: 444px){
+    .filter-options #cuisines-select {
+      margin-left: 44px;
+    }
+
+  }
+}
+
 @media (max-width: 600px) {
   body {
     font-size: 14px;
-  }
-  @media (max-width: 444px) {
-    .filter-options {
-      text-align: center;
-      padding-bottom: 60px;
-    }
   }
   .result-div {
     margin: 0 auto;
