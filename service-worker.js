@@ -1,6 +1,6 @@
-var cacheName = "restaurantsReviewsPWA";
-var dataCacheName = "restaurantsData-v2";
-var filesToCache = [
+const cacheName = "restaurantsReviewsPWA";
+const dataCacheName = "restaurantsData-v2";
+const filesToCache = [
   "/",
   "/index.html",
   "/restaurant.html",
@@ -31,10 +31,11 @@ var filesToCache = [
   "/img/10-s.jpg"
 ];
 
-const port = 5500; // Change this to your server port
 const restaurantsReviewsUrlBase = `data/restaurants.json`;
 
-//cache site assets
+/**
+ * Cache site assets
+ */
 self.addEventListener("install", e => {
   console.log("[ServiceWorker] Install");
   e.waitUntil(

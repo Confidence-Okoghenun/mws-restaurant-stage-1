@@ -234,7 +234,10 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 } */
 
-document.addEventListener("DOMContentLoaded", event => {
+/**
+ * Removes focus ring form some none interactive elements
+ */
+document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     let tabedElems = document.querySelectorAll(".leaflet-pane");
     tabedElems.forEach(tabedElem => {

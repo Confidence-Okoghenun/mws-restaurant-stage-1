@@ -1,3 +1,6 @@
+/**
+ * Register Service Worker.
+ */
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js").then(function() {
     console.log("Service Worker Registered");
@@ -20,6 +23,7 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
+    // Tries to load data from cache
     caches.has("restaurantsReviewsPWA").then(function(boolean) {
       if (boolean) {
         caches.match("data/restaurants.json").then(response => {
@@ -30,6 +34,7 @@ class DBHelper {
           }
         });
       } else {
+        // If cache load fails, load from network
         let xhr = new XMLHttpRequest();
         xhr.open("GET", DBHelper.DATABASE_URL);
         xhr.onload = () => {
@@ -37,7 +42,6 @@ class DBHelper {
             // Got a success response from server!
             const json = JSON.parse(xhr.responseText);
             const restaurants = json.restaurants;
-
             callback(null, restaurants);
           } else {
             // Oops!. Got an error from server.
